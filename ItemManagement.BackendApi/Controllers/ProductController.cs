@@ -21,6 +21,9 @@ namespace ItemManagement.BackendApi.Controllers
         }
 
         //Get all department
+        /// <summary>
+        /// This method to get all Product info
+        /// </summary>
         [HttpGet]
         public async Task<IEnumerable<Product>> GetAllProduct()
         {
@@ -28,12 +31,18 @@ namespace ItemManagement.BackendApi.Controllers
         }
 
         //Get Department
+        /// <summary>
+        /// This method to get a Product info
+        /// </summary>
         [HttpGet("{productId}")]
         public async Task<ActionResult<Product>> GetAProduct(int productId)
         {
             return await _productRepository.GetAProduct(productId);
         }
 
+        /// <summary>
+        /// This method to create new Product
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<Product>> CreateDepartment([FromBody] Product product)
         {
@@ -41,6 +50,9 @@ namespace ItemManagement.BackendApi.Controllers
             return CreatedAtAction(nameof(GetAProduct), new { ProductId = newProduct.ProductId }, newProduct);
         }
 
+        /// <summary>
+        /// This method to update Product info
+        /// </summary>
         [HttpPut("{productId}")]
         public async Task<ActionResult> UpdateProduct(int productId, [FromForm] Product product)
         {
@@ -52,6 +64,9 @@ namespace ItemManagement.BackendApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// This method to Delete Product
+        /// </summary>
         [HttpDelete("{productId}")]
         public async Task<ActionResult> DeleteProduct(int productId)
         {

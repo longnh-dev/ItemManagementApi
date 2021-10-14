@@ -20,12 +20,18 @@ namespace ItemManagement.BackendApi.Controllers
             _orderRepository = orderRepository;
         }
 
+        /// <summary>
+        /// This method to get all Order info
+        /// </summary>
         [HttpGet]
         public async Task<IEnumerable<Order>> GetAllOrder()
         {
             return await _orderRepository.GetAllOrder();
         }
 
+        /// <summary>
+        /// This method to get a Order info
+        /// </summary>
         //Get Department
         [HttpGet("{orderId}")]
         public async Task<ActionResult<Order>> GetAOrder(int orderId)
@@ -33,6 +39,9 @@ namespace ItemManagement.BackendApi.Controllers
             return await _orderRepository.GetAOrder(orderId);
         }
 
+        /// <summary>
+        /// This method to create new order
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<Order>> CreateOrder([FromForm] Order order)
         {
@@ -40,6 +49,9 @@ namespace ItemManagement.BackendApi.Controllers
             return CreatedAtAction(nameof(GetAOrder), new { ProductId = newOrder.OrderId }, newOrder);
         }
 
+        /// <summary>
+        /// This method to update order info
+        /// </summary>
         [HttpPut("{orderId}")]
         public async Task<ActionResult> UpdateOrder(int orderId, [FromForm] Order order)
         {
@@ -51,6 +63,9 @@ namespace ItemManagement.BackendApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// This method to delete
+        /// </summary>
         [HttpDelete("{orderId}")]
         public async Task<ActionResult> DeleteOrder(int orderId)
         {

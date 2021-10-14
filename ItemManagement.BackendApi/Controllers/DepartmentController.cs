@@ -16,12 +16,14 @@ namespace ItemManagement.Api.Controllers
         private readonly IDepartmentRepository _departmentRepository;
 
         public DepartmentController(IDepartmentRepository departmentRepository)
-
         {
             _departmentRepository = departmentRepository;
         }
 
         //Get all department
+        /// <summary>
+        /// This method to get all Department info
+        /// </summary>
         [HttpGet]
         public async Task<IEnumerable<Department>> GetAllDepartment()
         {
@@ -29,12 +31,18 @@ namespace ItemManagement.Api.Controllers
         }
 
         //Get Department
+        /// <summary>
+        /// This method to get a Department
+        /// </summary>
         [HttpGet("{departmentId}")]
-        public async Task<ActionResult<Department>> GetADepartment(int DepartmentId)
+        public async Task<ActionResult<Department>> GetADepartment(int departmentId)
         {
-            return await _departmentRepository.GetADepartment(DepartmentId);
+            return await _departmentRepository.GetADepartment(departmentId);
         }
 
+        /// <summary>
+        /// This method to Create a Department
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<Department>> CreateDepartment([FromBody] Department department)
         {
@@ -42,6 +50,9 @@ namespace ItemManagement.Api.Controllers
             return CreatedAtAction(nameof(GetADepartment), new { DepartmentId = newDepartment.DepartmentId }, newDepartment);
         }
 
+        /// <summary>
+        /// This method to Update information of a Department
+        /// </summary>
         [HttpPut("{departmentId}")]
         public async Task<ActionResult> UpdateDepartment(int departmentId, [FromForm] Department department)
         {
@@ -53,6 +64,9 @@ namespace ItemManagement.Api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// This method to Delete Department
+        /// </summary>
         [HttpDelete("{departmentId}")]
         public async Task<ActionResult> DeleteDepartment(int departmentId)
         {
