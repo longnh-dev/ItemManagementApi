@@ -72,12 +72,13 @@ namespace ItemManagement.Api.Controllers
                 return BadRequest();
             }
             await _departmentRepository.Update(department);
-            return NoContent();
+            return Ok(department);
         }
 
         /// <summary>
         /// This method to Delete Department
         /// </summary>
+        /// <response code="201">Department deleted successfully</response>
         [HttpDelete("{departmentId}")]
         public async Task<ActionResult> DeleteDepartment(int departmentId)
         {
@@ -86,7 +87,7 @@ namespace ItemManagement.Api.Controllers
                 return NotFound();
 
             await _departmentRepository.Delete(departmentToDelete.DepartmentId);
-            return NoContent();
+            return Ok();
         }
     }
 }
