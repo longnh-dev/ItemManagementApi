@@ -72,7 +72,7 @@ namespace ItemManagement.Api.Controllers
                 return BadRequest();
             }
             await _departmentRepository.Update(department);
-            return Ok(department);
+            return Ok();
         }
 
         /// <summary>

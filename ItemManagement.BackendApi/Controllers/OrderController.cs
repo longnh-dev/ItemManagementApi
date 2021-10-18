@@ -60,7 +60,7 @@ namespace ItemManagement.BackendApi.Controllers
                 return BadRequest();
             }
             await _orderRepository.Update(order);
-            return NoContent();
+            return Ok();
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace ItemManagement.BackendApi.Controllers
                 return NotFound();
 
             await _orderRepository.Delete(orderToDelete.OrderId);
-            return NoContent();
+            return Ok();
         }
     }
 }

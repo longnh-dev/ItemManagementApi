@@ -61,7 +61,7 @@ namespace ItemManagement.BackendApi.Controllers
                 return BadRequest();
             }
             await _productRepository.Update(product);
-            return NoContent();
+            return Ok();
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace ItemManagement.BackendApi.Controllers
                 return NotFound();
 
             await _productRepository.Delete(productToDelete.ProductId);
-            return NoContent();
+            return Ok();
         }
     }
 }
