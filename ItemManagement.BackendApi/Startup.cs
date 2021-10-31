@@ -35,6 +35,7 @@ namespace ItemManagement.BackendApi
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
             services.AddDbContext<ItemManagementDbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("ItemManagementDb")));
 
             SetupSwagger(services);
@@ -63,6 +64,7 @@ namespace ItemManagement.BackendApi
                         Url = new Uri("https://example.com/license"),
                     }
                 });
+
                 var fileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var filePath = Path.Combine(AppContext.BaseDirectory, fileName);
                 c.IncludeXmlComments(filePath);

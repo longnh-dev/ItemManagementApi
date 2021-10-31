@@ -8,11 +8,12 @@ namespace ItemManagement.Data.Models.Configurations
     {
         public void Configure(EntityTypeBuilder<Department> builder)
         {
-            builder.ToTable("Department");
-            builder.HasKey(e => e.DepartmentId);
-            builder.Property(e => e.DepartmentName).IsRequired().HasColumnName("DepartmentName").HasMaxLength(50);
-            builder.Property(e => e.Leader).IsRequired().HasColumnName("Leader").HasMaxLength(40);
-            builder.Property(e => e.DateOfEstablish).IsRequired().HasColumnName("DateOfEstablish").HasMaxLength(50);
+            builder.ToTable("Departments");
+            builder.HasKey(e => e.Id);
+            builder.Property(e => e.DepartmentName).IsRequired().HasColumnName("DepartmentNames").HasMaxLength(30);
+            builder.Property(e => e.Leader).IsRequired().HasColumnName("Leaders").HasMaxLength(30);
+            builder.Property(e => e.Personnel).IsRequired().HasColumnName("Personnels").HasMaxLength(30);
+            builder.Property(e => e.DateOfEstablish).IsRequired().HasColumnName("DateOfEstablish");
         }
     }
 }

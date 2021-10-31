@@ -12,10 +12,10 @@ namespace ItemManagement.Api.Repositories
 
         Task<Department> GetADepartment(int departmentId);
 
-        Task<Department> Create(Department department);
+        Task<Department> CreateNewDepartment(Department department);
 
-        Task Update(Department department);
+        Task UpdateDepartment(Department department);
 
-        Task Delete(int departmentId);
+        Task DeleteDepartment(int departmentId);
     }
 }

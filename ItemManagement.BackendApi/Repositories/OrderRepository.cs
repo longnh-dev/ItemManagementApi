@@ -17,7 +17,7 @@ namespace ItemManagement.BackendApi.Repositories
             _context = context;
         }
 
-        public async Task<Order> Create(Order order)
+        public async Task<Order> CreateNewOrder(Order order)
         {
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
@@ -25,7 +25,7 @@ namespace ItemManagement.BackendApi.Repositories
             return order;
         }
 
-        public async Task Delete(int orderId)
+        public async Task DeleteOrder(int orderId)
         {
             var orderToDelete = await _context.Orders.FindAsync(orderId);
             _context.Orders.Remove(orderToDelete);
@@ -42,7 +42,7 @@ namespace ItemManagement.BackendApi.Repositories
             return await _context.Orders.FindAsync(orderId);
         }
 
-        public async Task Update(Order order)
+        public async Task UpdateOrder(Order order)
         {
             _context.Entry(order).State = EntityState.Modified;
             await _context.SaveChangesAsync();

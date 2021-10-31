@@ -1,5 +1,6 @@
 ﻿using ItemManagement.BackendApi.Repositories;
 using ItemManagement.Data.Models.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -42,11 +43,15 @@ namespace ItemManagement.BackendApi.Controllers
         /// <summary>
         /// This method to create new order
         /// </summary>
+        /// /// <param name="Order">Request's payload</param>
+        /// <returns></returns>
+        /// <response code="201">Order created successfully</response>
         [HttpPost]
-        public async Task<ActionResult<Order>> CreateOrder([FromForm] Order order)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<ActionResult<Order>> CreateNewOrder([FromBody] Order order)
         {
-            var newOrder = await _orderRepository.Create(order);
-            return CreatedAtAction(nameof(GetAOrder), new { ProductId = newOrder.OrderId }, newOrder);
+            var newOrder = await _orderRepository.CreateNewOrder(order);
+            return CreatedAtAction(nameof(GetAOrder), new { OrderId = newOrder.Id }, newOrder);
         }
 
         /// <summary>
@@ -55,11 +60,11 @@ namespace ItemManagement.BackendApi.Controllers
         [HttpPut("{orderId}")]
         public async Task<ActionResult> UpdateOrder(int orderId, [FromForm] Order order)
         {
-            if (orderId != order.OrderId)
+            if (orderId != order.Id)
             {
                 return BadRequest();
             }
-            await _orderRepository.Update(order);
+            await _orderRepository.UpdateOrder(order);
             return Ok();
         }
 
@@ -73,7 +78,7 @@ namespace ItemManagement.BackendApi.Controllers
             if (orderToDelete == null)
                 return NotFound();
 
-            await _orderRepository.Delete(orderToDelete.OrderId);
+            await _orderRepository.DeleteOrder(orderToDelete.Id);
             return Ok();
         }
     }

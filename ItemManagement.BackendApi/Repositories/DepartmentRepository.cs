@@ -16,7 +16,7 @@ namespace ItemManagement.Api.Repositories
             _context = context;
         }
 
-        public async Task<Department> Create(Department department)
+        public async Task<Department> CreateNewDepartment(Department department)
         {
             _context.Departments.Add(department);
             await _context.SaveChangesAsync();
@@ -24,7 +24,7 @@ namespace ItemManagement.Api.Repositories
             return department;
         }
 
-        public async Task Delete(int departmentId)
+        public async Task DeleteDepartment(int departmentId)
         {
             var departmentToDelete = await _context.Departments.FindAsync(departmentId);
             _context.Departments.Remove(departmentToDelete);
@@ -41,7 +41,7 @@ namespace ItemManagement.Api.Repositories
             return await _context.Departments.FindAsync(departmentId);
         }
 
-        public async Task Update(Department department)
+        public async Task UpdateDepartment(Department department)
         {
             _context.Entry(department).State = EntityState.Modified;
             await _context.SaveChangesAsync();

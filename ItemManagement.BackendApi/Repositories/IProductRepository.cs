@@ -12,10 +12,10 @@ namespace ItemManagement.BackendApi.Repositories
 
         Task<Product> GetAProduct(int productId);
 
-        Task<Product> Create(Product product);
+        Task<Product> CreateNewProduct(Product product);
 
-        Task Update(Product product);
+        Task UpdateProduct(Product product);
 
-        Task Delete(int productId);
+        Task DeleteProduct(int productId);
     }
 }

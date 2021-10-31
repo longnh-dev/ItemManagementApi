@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +8,11 @@ namespace ItemManagement.Data.Models.Entities
 {
     public class Cart
     {
-        public int CartId { get; set; }
+        public int Id { get; set; }
         public int OrderId { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public int ProductId { get; set; }
+        public string Customer { get; set; }
+        public int ProductQuantity { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

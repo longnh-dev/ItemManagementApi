@@ -17,7 +17,7 @@ namespace ItemManagement.BackendApi.Repositories
             _context = context;
         }
 
-        public async Task<Product> Create(Product product)
+        public async Task<Product> CreateNewProduct(Product product)
         {
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
@@ -25,7 +25,7 @@ namespace ItemManagement.BackendApi.Repositories
             return product;
         }
 
-        public async Task Delete(int productId)
+        public async Task DeleteProduct(int productId)
         {
             var productToDelete = await _context.Products.FindAsync(productId);
             _context.Products.Remove(productToDelete);
@@ -42,7 +42,7 @@ namespace ItemManagement.BackendApi.Repositories
             return await _context.Products.FindAsync(productId);
         }
 
-        public async Task Update(Product product)
+        public async Task UpdateProduct(Product product)
         {
             _context.Entry(product).State = EntityState.Modified;
             await _context.SaveChangesAsync();

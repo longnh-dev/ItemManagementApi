@@ -55,10 +55,10 @@ namespace ItemManagement.Api.Controllers
         /// <response code="201">Department created successfully</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<Department>> CreateDepartment([FromBody] Department department)
+        public async Task<ActionResult<Department>> CreateNewDepartment([FromBody] Department department)
         {
-            var newDepartment = await _departmentRepository.Create(department);
-            return CreatedAtAction(nameof(GetADepartment), new { DepartmentId = newDepartment.DepartmentId }, newDepartment);
+            var newDepartment = await _departmentRepository.CreateNewDepartment(department);
+            return CreatedAtAction(nameof(GetADepartment), new { DepartmentId = newDepartment.Id }, newDepartment);
         }
 
         /// <summary>
@@ -67,18 +67,18 @@ namespace ItemManagement.Api.Controllers
         [HttpPut("{departmentId}")]
         public async Task<ActionResult> UpdateDepartment(int departmentId, [FromForm] Department department)
         {
-            if (departmentId != department.DepartmentId)
+            if (departmentId != department.Id)
             {
                 return BadRequest();
             }
-            await _departmentRepository.Update(department);
+            await _departmentRepository.UpdateDepartment(department);
             return Ok();
         }
 
         /// <summary>
         /// This method to Delete Department
         /// </summary>
-        /// <response code="201">Department deleted successfully</response>
+        /// <response code="200">Department deleted successfully</response>
         [HttpDelete("{departmentId}")]
         public async Task<ActionResult> DeleteDepartment(int departmentId)
         {
@@ -86,7 +86,7 @@ namespace ItemManagement.Api.Controllers
             if (departmentToDelete == null)
                 return NotFound();
 
-            await _departmentRepository.Delete(departmentToDelete.DepartmentId);
+            await _departmentRepository.DeleteDepartment(departmentToDelete.Id);
             return Ok();
         }
     }

@@ -12,10 +12,10 @@ namespace ItemManagement.BackendApi.Repositories
 
         Task<Order> GetAOrder(int orderId);
 
-        Task<Order> Create(Order order);
+        Task<Order> CreateNewOrder(Order order);
 
-        Task Update(Order order);
+        Task UpdateOrder(Order order);
 
-        Task Delete(int orderId);
+        Task DeleteOrder(int orderId);
     }
 }

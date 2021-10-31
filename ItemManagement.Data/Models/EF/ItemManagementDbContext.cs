@@ -20,8 +20,6 @@ namespace ItemManagerment.Models
             modelBuilder.ApplyConfiguration(new CartConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
-
-            //   var entity = modelBuilder.Entity<Department>();  plan 1
         }
 
         public DbSet<Product> Products { get; set; }

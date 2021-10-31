@@ -46,8 +46,8 @@ namespace ItemManagement.BackendApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> CreateDepartment([FromBody] Product product)
         {
-            var newProduct = await _productRepository.Create(product);
-            return CreatedAtAction(nameof(GetAProduct), new { ProductId = newProduct.ProductId }, newProduct);
+            var newProduct = await _productRepository.CreateNewProduct(product);
+            return CreatedAtAction(nameof(GetAProduct), new { ProductId = newProduct.Id }, newProduct);
         }
 
         /// <summary>
@@ -56,11 +56,11 @@ namespace ItemManagement.BackendApi.Controllers
         [HttpPut("{productId}")]
         public async Task<ActionResult> UpdateProduct(int productId, [FromForm] Product product)
         {
-            if (productId != product.ProductId)
+            if (productId != product.Id)
             {
                 return BadRequest();
             }
-            await _productRepository.Update(product);
+            await _productRepository.UpdateProduct(product);
             return Ok();
         }
 
@@ -74,7 +74,7 @@ namespace ItemManagement.BackendApi.Controllers
             if (productToDelete == null)
                 return NotFound();
 
-            await _productRepository.Delete(productToDelete.ProductId);
+            await _productRepository.DeleteProduct(productToDelete.Id);
             return Ok();
         }
     }
