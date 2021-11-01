@@ -30,8 +30,8 @@ namespace ItemManagement.BackendApi
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
-            services.AddDbContext<ItemManagementDbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("ItemManagementDb")));
 
+            services.AddDbContext<ItemManagementDbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("ItemManagementDb")));
             SetupSwagger(services);
             services.AddControllers();
         }
