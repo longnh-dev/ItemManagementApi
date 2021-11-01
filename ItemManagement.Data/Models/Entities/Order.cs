@@ -1,9 +1,5 @@
 ﻿using ItemManagement.Data.Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ItemManagement.Data.Models.Entities
 {
@@ -16,6 +12,6 @@ namespace ItemManagement.Data.Models.Entities
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public DateTime OrderDate { get; set; }
-        public bool Status { get; set; }
+        public OrderStatus Status { get; set; }
     }
 }

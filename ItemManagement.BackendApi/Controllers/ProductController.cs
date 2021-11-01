@@ -1,9 +1,7 @@
 ﻿using ItemManagement.BackendApi.Repositories;
 using ItemManagement.Data.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ItemManagement.BackendApi.Controllers
@@ -65,7 +63,7 @@ namespace ItemManagement.BackendApi.Controllers
         }
 
         /// <summary>
-        /// This method to Delete Product
+        /// This method to delete Product
         /// </summary>
         [HttpDelete("{productId}")]
         public async Task<ActionResult> DeleteProduct(int productId)

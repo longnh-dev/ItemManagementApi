@@ -21,12 +21,12 @@ namespace ItemManagement.BackendApi.Controllers
 
         //Get All Cart
         /// <summary>
-        /// This method to get all Department info
+        /// This method to get all Cart info
         /// </summary>
-        /// <returns>A list of Department</returns>
+        /// <returns>A list of Carts</returns>
         /// <remarks>
         /// Sample request
-        /// GET api/departments
+        /// GET Api/Cart
         /// </remarks>
         [HttpGet]
         public async Task<IEnumerable<Cart>> GetAllCart()
@@ -35,12 +35,22 @@ namespace ItemManagement.BackendApi.Controllers
         }
 
         //Get Cart by Id
+        /// <summary>
+        /// This method to get a Cart by Id
+        /// </summary>
+        /// <returns> Return Cart by Id</returns>
         [HttpGet("{cartId}")]
         public async Task<ActionResult<Cart>> GetACart(int cartId)
         {
             return await _cartRepository.GetACart(cartId);
         }
 
+        /// <summary>
+        /// This method to Create a Cart
+        /// </summary>
+        /// <param name="cart">Request's payload</param>
+        /// <returns></returns>
+        /// <response code="201">Cart created successfully</response>
         //Create New Cart
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -51,6 +61,9 @@ namespace ItemManagement.BackendApi.Controllers
         }
 
         //Update cart information
+        /// <summary>
+        /// This method to Update information of a Cart
+        /// </summary>
         [HttpPut("{cartId}")]
         public async Task<ActionResult> UpdateCart(int cartId, [FromForm] Cart cart)
 
@@ -64,6 +77,10 @@ namespace ItemManagement.BackendApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// This method to Delete Cart
+        /// </summary>
+        /// <response code="200">Cart deleted successfully</response>
         [HttpDelete("{cartId}")]
         public async Task<ActionResult> DeleteCart(int cartId)
         {

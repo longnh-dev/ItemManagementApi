@@ -2,9 +2,7 @@
 using ItemManagement.Data.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ItemManagement.BackendApi.Controllers
@@ -55,7 +53,7 @@ namespace ItemManagement.BackendApi.Controllers
         }
 
         /// <summary>
-        /// This method to update order info
+        /// This method to update Order info
         /// </summary>
         [HttpPut("{orderId}")]
         public async Task<ActionResult> UpdateOrder(int orderId, [FromForm] Order order)
@@ -69,7 +67,7 @@ namespace ItemManagement.BackendApi.Controllers
         }
 
         /// <summary>
-        /// This method to delete
+        /// This method to delete Order
         /// </summary>
         [HttpDelete("{orderId}")]
         public async Task<ActionResult> DeleteOrder(int orderId)
