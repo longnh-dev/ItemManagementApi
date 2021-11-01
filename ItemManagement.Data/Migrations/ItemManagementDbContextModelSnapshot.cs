@@ -99,6 +99,10 @@ namespace ItemManagement.Data.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("Address");
 
+                    b.Property<int>("CartId")
+                        .HasColumnType("int")
+                        .HasColumnName("ProductId");
+
                     b.Property<string>("Customer")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)")
@@ -121,10 +125,6 @@ namespace ItemManagement.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("PhoneNumber");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int")
-                        .HasColumnName("ProductId");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");

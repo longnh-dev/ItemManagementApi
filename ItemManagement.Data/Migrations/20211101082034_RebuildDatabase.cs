@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ItemManagement.Data.Migrations
 {
-    public partial class RebuilDatatbase : Migration
+    public partial class RebuildDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,8 +46,9 @@ namespace ItemManagement.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Customer = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    Customer = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),

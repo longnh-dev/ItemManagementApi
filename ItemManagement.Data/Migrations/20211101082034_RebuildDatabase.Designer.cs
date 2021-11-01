@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ItemManagement.Data.Migrations
 {
     [DbContext(typeof(ItemManagementDbContext))]
-    [Migration("20211031062218_RebuilDatatbase")]
-    partial class RebuilDatatbase
+    [Migration("20211101082034_RebuildDatabase")]
+    partial class RebuildDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,6 +100,10 @@ namespace ItemManagement.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("Address");
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int")
+                        .HasColumnName("ProductId");
 
                     b.Property<string>("Customer")
                         .HasMaxLength(30)
