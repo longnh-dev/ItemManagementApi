@@ -11,11 +11,10 @@ namespace ItemManagement.Data.Models.Configurations
             builder.ToTable("Carts");
 
             builder.HasKey(e => e.Id);
-            builder.Property(e => e.OrderId).HasColumnName("OrderId").IsRequired();
-            builder.Property(e => e.ProductId).HasColumnName("ProductId").IsRequired();
-            builder.Property(e => e.Customer).HasColumnName("Customer").IsRequired().HasMaxLength(30);
-            builder.Property(e => e.ProductQuantity).HasColumnName("ProductQuantity").IsRequired();
-            builder.Property(e => e.DateCreated).HasColumnName("DateCreated").IsRequired();
+            builder.Property(x => x.Id).UseIdentityColumn();
+
+            builder.HasOne(x => x.Product).WithMany(x => x.Carts).HasForeignKey(x => x.ProductId);
+            
         }
     }
 }

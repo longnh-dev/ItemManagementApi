@@ -1,8 +1,7 @@
 ﻿using ItemManagement.BackendApi.Repositories;
-using ItemManagement.Data.Models.Entities;
-using Microsoft.AspNetCore.Http;
+using ItemManagement.Data.Models;
+using ItemManagement.ViewModels.Catalog;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ItemManagement.BackendApi.Controllers
@@ -19,64 +18,59 @@ namespace ItemManagement.BackendApi.Controllers
             _orderRepository = orderRepository;
         }
 
-        /// <summary>
-        /// This method to get all Order info
-        /// </summary>
         [HttpGet]
-        public async Task<IEnumerable<Order>> GetAllOrder()
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetOrderPagingRequest request)
         {
-            return await _orderRepository.GetAllOrder();
+            var order = await _orderRepository.GetAllPaging(request);
+            return Ok(order);
         }
 
-        /// <summary>
-        /// This method to get a Order info
-        /// </summary>
-        //Get Department
-        [HttpGet("{orderId}")]
-        public async Task<ActionResult<Order>> GetAOrder(int orderId)
+        //http://localhost:port/product/1
+        [HttpGet("{productId}")]
+        public async Task<IActionResult> GetById(int orderId)
         {
-            return await _orderRepository.GetAOrder(orderId);
+            var order = await _orderRepository.GetAOrder(orderId);
+
+            if (order == null)
+                return BadRequest("Not found product");
+
+            return Ok(order);
         }
 
-        /// <summary>
-        /// This method to create new order
-        /// </summary>
-        /// /// <param name="Order">Request's payload</param>
-        /// <returns></returns>
-        /// <response code="201">Order created successfully</response>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<Order>> CreateNewOrder([FromBody] Order order)
+        public async Task<IActionResult> Create([FromForm] OrderViewModel orderViewModel)
         {
-            var newOrder = await _orderRepository.CreateNewOrder(order);
-            return CreatedAtAction(nameof(GetAOrder), new { OrderId = newOrder.Id }, newOrder);
+            var orderId = await _orderRepository.CreateNewOrder(orderViewModel);
+            if (orderId == 0)
+                return BadRequest();
+
+            var order = await _orderRepository.GetAOrder(orderId);
+
+            return CreatedAtAction(nameof(GetById), new { id = orderId }, order);
         }
 
-        /// <summary>
-        /// This method to update Order info
-        /// </summary>
-        [HttpPut("{orderId}")]
-        public async Task<ActionResult> UpdateOrder(int orderId, [FromForm] Order order)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromForm] OrderViewModel orderViewModel)
         {
-            if (orderId != order.Id)
+            if (ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
-            await _orderRepository.UpdateOrder(order);
+            var affectedResult = await _orderRepository.UpdateOrder(orderViewModel);
+            if (affectedResult == 0)
+                return BadRequest();
+
             return Ok();
         }
 
-        /// <summary>
-        /// This method to delete Order
-        /// </summary>
-        [HttpDelete("{orderId}")]
-        public async Task<ActionResult> DeleteOrder(int orderId)
+        [HttpDelete("{productId}")]
+        public async Task<IActionResult> Delete(int orderId)
         {
-            var orderToDelete = await _orderRepository.GetAOrder(orderId);
-            if (orderToDelete == null)
-                return NotFound();
+            var affectedResult = await _orderRepository.DeleteOrder(orderId);
 
-            await _orderRepository.DeleteOrder(orderToDelete.Id);
+            if (affectedResult == 0)
+                return BadRequest();
+
             return Ok();
         }
     }

@@ -15,5 +15,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\ItemManagement.Data\ItemManagement.Data.csproj" />
+		<ProjectReference Include="..\ItemManagement.ViewModels\ItemManagement.ViewModels.csproj" />
 	</ItemGroup>
 </Project>

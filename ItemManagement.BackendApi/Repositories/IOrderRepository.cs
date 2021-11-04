@@ -1,4 +1,7 @@
-﻿using ItemManagement.Data.Models.Entities;
+﻿using ItemManagement.Data.Models;
+using ItemManagement.Data.Models.Entities;
+using ItemManagement.ViewModels.Catalog;
+using ItemManagement.ViewModels.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,14 +9,16 @@ namespace ItemManagement.BackendApi.Repositories
 {
     public interface IOrderRepository
     {
-        Task<IEnumerable<Order>> GetAllOrder();
+        Task<List<OrderViewModel>> GetAllOrder();
 
-        Task<Order> GetAOrder(int orderId);
+        Task<OrderViewModel> GetAOrder(int orderId);
 
-        Task<Order> CreateNewOrder(Order order);
+        Task<int> CreateNewOrder(OrderViewModel orderViewModel);
 
-        Task UpdateOrder(Order order);
+        Task<int> UpdateOrder(OrderViewModel orderViewModel);
 
-        Task DeleteOrder(int orderId);
+        Task<int> DeleteOrder(int orderId);
+
+        Task<PagedResult<OrderViewModel>> GetAllPaging(GetOrderPagingRequest request);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ItemManagement.Data.Models.Entities
 {
@@ -9,5 +10,6 @@ namespace ItemManagement.Data.Models.Entities
         public string Leader { get; set; }
         public int Personnel { get; set; }
         public DateTime DateOfEstablish { get; set; }
+        
     }
 }

@@ -1,3 +1,4 @@
+using ItemManagemenkt.Application.Catalog.Products;
 using ItemManagement.Api.Repositories;
 using ItemManagement.BackendApi.Repositories;
 using ItemManagerment.Models;

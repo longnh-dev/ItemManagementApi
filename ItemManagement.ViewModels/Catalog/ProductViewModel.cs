@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ItemManagement.Data.Models.Entities
+namespace ItemManagement.ViewModels.Catalog
 {
-    public class Product
+    public class ProductViewModel
     {
         public int Id { get; set; }
         public string ProductName { get; set; }
@@ -11,7 +14,5 @@ namespace ItemManagement.Data.Models.Entities
         public Decimal Price { get; set; }
         public Decimal OriginalPrice { get; set; }
         public int Stock { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
-        public List<Cart> Carts { get; set; }
     }
 }

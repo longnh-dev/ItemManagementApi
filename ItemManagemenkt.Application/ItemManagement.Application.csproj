@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Catalog\" />
+    <Folder Include="Common\" />
+    <Folder Include="System\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ItemManagement.BackendApi\ItemManagement.BackendApi.csproj" />
+    <ProjectReference Include="..\ItemManagement.Data\ItemManagement.Data.csproj" />
+    <ProjectReference Include="..\ItemManagement.ViewModels\ItemManagement.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,5 +1,7 @@
-﻿using ItemManagement.BackendApi.Repositories;
+﻿using ItemManagemenkt.Application.Catalog.Products;
+using ItemManagement.BackendApi.Repositories;
 using ItemManagement.Data.Models.Entities;
+using ItemManagement.ViewModels.Catalog;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,66 +15,65 @@ namespace ItemManagement.BackendApi.Controllers
         private readonly IProductRepository _productRepository;
 
         public ProductController(IProductRepository productRepository)
-
         {
             _productRepository = productRepository;
         }
 
-        //Get all department
-        /// <summary>
-        /// This method to get all Product info
-        /// </summary>
+        //http://localhost:port/product?pageIndex=1&pageSize=10&CategoryId=
         [HttpGet]
-        public async Task<IEnumerable<Product>> GetAllProduct()
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetProductPagingRequest request)
         {
-            return await _productRepository.GetAllProduct();
+            var products = await _productRepository.GetAllPaging(request);
+            return Ok(products);
         }
 
-        //Get Department
-        /// <summary>
-        /// This method to get a Product info
-        /// </summary>
+        //http://localhost:port/product/1
         [HttpGet("{productId}")]
-        public async Task<ActionResult<Product>> GetAProduct(int productId)
+        public async Task<IActionResult> GetById(int productId)
         {
-            return await _productRepository.GetAProduct(productId);
+            var product = await _productRepository.GetById(productId);
+
+            if (product == null)
+                return BadRequest("Not found product");
+
+            return Ok(product);
         }
 
-        /// <summary>
-        /// This method to create new Product
-        /// </summary>
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateDepartment([FromBody] Product product)
+        public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
-            var newProduct = await _productRepository.CreateNewProduct(product);
-            return CreatedAtAction(nameof(GetAProduct), new { ProductId = newProduct.Id }, newProduct);
+
+            var productId = await _productRepository.Create(request);
+            if (productId == 0)
+                return BadRequest();
+
+            var product = await _productRepository.GetById(productId);
+
+            return CreatedAtAction(nameof(GetById), new { id = productId }, product);
         }
 
-        /// <summary>
-        /// This method to update Product info
-        /// </summary>
-        [HttpPut("{productId}")]
-        public async Task<ActionResult> UpdateProduct(int productId, [FromForm] Product product)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromForm] ProductUpdateRequest request)
         {
-            if (productId != product.Id)
+            if (ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
-            await _productRepository.UpdateProduct(product);
+            var affectedResult = await _productRepository.Update(request);
+            if (affectedResult == 0)
+                return BadRequest();
+
             return Ok();
         }
 
-        /// <summary>
-        /// This method to delete Product
-        /// </summary>
         [HttpDelete("{productId}")]
-        public async Task<ActionResult> DeleteProduct(int productId)
+        public async Task<IActionResult> Delete(int productId)
         {
-            var productToDelete = await _productRepository.GetAProduct(productId);
-            if (productToDelete == null)
-                return NotFound();
+            var affectedResult = await _productRepository.Delete(productId);
 
-            await _productRepository.DeleteProduct(productToDelete.Id);
+            if (affectedResult == 0)
+                return BadRequest();
+
             return Ok();
         }
     }
